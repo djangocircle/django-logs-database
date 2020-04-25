@@ -1,0 +1,1 @@
+# Django Logging Storage
