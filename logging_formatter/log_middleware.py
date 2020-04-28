@@ -1,19 +1,8 @@
 import logging
 import os
 import time
+from time import gmtime, strftime
 from pymongo import MongoClient
-
-class FileLoggingHandler(logging.FileHandler):
-
-    def __init__(self, location="file"):
-        logging.Handler.__init__(self)
-        self.file_location = location
-        os.makedirs(os.path.dirname(self.file_location), exist_ok=True)
-        logging.FileHandler.__init__(self, location)
-
-    def emit(self, record):
-        """save log record in file or database"""
-        logging.FileHandler.emit(self, record)
 
 class DatabaseLoggingHandler(logging.Handler):
 
@@ -31,7 +20,7 @@ class DatabaseLoggingHandler(logging.Handler):
           "level": record.levelname,
           "module": record.module,
           "line": record.lineno,
-          "asctime": record.asctime,
+          "asctime": record.asctime if getattr(record, "asctime", None) else strftime("%Y-%m-%d %H:%M", gmtime()),
           "message": record.message # use `formatted_message` for store formatted log
         }
 

@@ -137,8 +137,9 @@ LOGGING = {
     'handlers': {
         'customHandler_1': {
             'formatter': 'info-formatter',
-            'class': 'logging_formatter.log_middleware.FileLoggingHandler',
-            'location': 'app_logs/app.log',
+            'class': 'logging_formatter.log_middleware.DatabaseLoggingHandler',
+            'database': 'logging_formatter',
+            'collection': 'logs',
             'filters': ['filter_info_level'],
         },
         'customHandler_2': {
