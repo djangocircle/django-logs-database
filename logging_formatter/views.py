@@ -7,11 +7,11 @@ logger = logging.getLogger('customLogger')
 
 class UserView(APIView):
     def get(self, request):
-        try:
-            logger.info("Init log from view")
-            logger.warning("Init warning from view")
-            logger.error("Test error")
-        except:
-            logger.error(traceback.format_exc())
-        
+        logger.info("Init log from view")
+        logger.warning("Init warning from view")
+        logger.error("Test error")
+
+        # raise Exception("test raised exception")
+        # Uncomment the above line for test the storing of exception traceback in database
+
         return Response("Success")
